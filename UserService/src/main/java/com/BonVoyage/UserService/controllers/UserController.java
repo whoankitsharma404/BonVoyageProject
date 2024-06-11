@@ -16,8 +16,6 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerNewUser(@RequestBody UserDTO userDTO){
-//        this.userService.registerNewAccount(userDTO);
-//        return new ResponseEntity<>(new ApiResponse("failed",1), HttpStatus.OK);
         UserDTO registeredUser =null;
         try{
             registeredUser = userService.registerNewAccount(userDTO);
@@ -29,7 +27,6 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody UserDTO userDTO){
-
         return new ResponseEntity<>(this.userService.loginUser(userDTO), HttpStatus.OK);
     }
 

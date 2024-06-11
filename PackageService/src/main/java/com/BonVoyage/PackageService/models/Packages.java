@@ -4,10 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -62,6 +65,17 @@ public class Packages {
 
     @Column(name = "package_image", nullable = false)
     private String packageImage;
+
+    @Timestamp
+    @Column(name = "created_date", nullable = false, unique = true)
+    private String createdDate;
+
+    @Timestamp
+    @Column(name = "updated_date", nullable = false, unique = true)
+    private String updatedDate;
+
+//    @Column(name = "package_itenary")
+//    private List<PackageItenary> packageItenary;
 
 
 }

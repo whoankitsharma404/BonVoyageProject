@@ -1,5 +1,6 @@
 package com.BonVoyage.PackageService.controllers;
 
+import com.BonVoyage.PackageService.payloads.ApiResponse;
 import com.BonVoyage.PackageService.payloads.PackageDTO;
 import com.BonVoyage.PackageService.services.PackageService;
 import lombok.AllArgsConstructor;
@@ -18,13 +19,28 @@ public class PackagesController {
     private PackageService packageService;
 
     @GetMapping("/getPackages")
-    public ResponseEntity<List<PackageDTO>> getAllPackage(){
-        return new ResponseEntity<>(this.packageService.getAllPackages(), HttpStatus.OK);
+    public ResponseEntity<?> getAllPackage(){
+        List<PackageDTO> packageDTOList =null;
+        try{
+            packageDTOList = packageService.getAllPackages();
+            return new ResponseEntity<>(new ApiResponse(packageDTOList,"success",packageDTOList.size()),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(packageDTOList,"failed",0),HttpStatus.OK);
+        }
+
     }
 
     @GetMapping("/getPackages/{destination}")
-    public ResponseEntity<List<PackageDTO>> getAllPackage(@PathVariable String destination){
-        return new ResponseEntity<>(this.packageService.getPackagesByDestination(destination), HttpStatus.OK);
+    public ResponseEntity<?> getAllPackage(@PathVariable String destination){
+
+        List<PackageDTO> packageDTOList =null;
+        try{
+            packageDTOList = packageService.getPackagesByDestination(destination);
+            return new ResponseEntity<>(new ApiResponse(packageDTOList,"success",packageDTOList.size()),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(packageDTOList,"failed",0),HttpStatus.OK);
+        }
+
     }
 
     @GetMapping("/onepackage/{packageId}")
