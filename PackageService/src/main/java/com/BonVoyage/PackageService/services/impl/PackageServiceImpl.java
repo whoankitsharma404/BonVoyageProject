@@ -56,11 +56,12 @@ public class PackageServiceImpl implements PackageService {
 
     @Override
     public PackageDTO getPackageById(String packageId) {
-        return null;
+        return mapToPackageDto(packageRepository.findByPackageID(packageId));
     }
 
     @Override
-    public PackageDTO getWishListById(String userId) {
+    public List<PackageDTO> getWishListById(String userId) {
+
         return null;
     }
 }

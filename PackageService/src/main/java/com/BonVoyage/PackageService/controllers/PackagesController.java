@@ -44,14 +44,26 @@ public class PackagesController {
     }
 
     @GetMapping("/onepackage/{packageId}")
-    public ResponseEntity<PackageDTO> getPackageById(@PathVariable String packageId){
-        return new ResponseEntity<>(this.packageService.getPackageById(packageId), HttpStatus.OK);
+    public ResponseEntity<?> getPackageById(@PathVariable String packageId){
+        PackageDTO pkg =null;
+        try{
+            pkg = packageService.getPackageById(packageId);
+            return new ResponseEntity<>(new ApiResponse(pkg,"success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(pkg,"failed",0),HttpStatus.OK);
+        }
     }
 
 
     @GetMapping("/wishlist/{userId}")
-    public ResponseEntity<PackageDTO> getWishListById(@PathVariable String userId){
-        return new ResponseEntity<>(this.packageService.getWishListById(userId), HttpStatus.OK);
+    public ResponseEntity<?> getWishListById(@PathVariable String userId){
+        List<PackageDTO> pkg =null;
+        try{
+            pkg = packageService.getWishListById(userId);
+            return new ResponseEntity<>(new ApiResponse(pkg,"success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(pkg,"failed",0),HttpStatus.OK);
+        }
     }
 
 }

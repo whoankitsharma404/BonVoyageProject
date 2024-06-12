@@ -12,6 +12,6 @@ public interface PackageService {
 
     PackageDTO getPackageById(String packageId);
 
-    PackageDTO getWishListById(String userId);
+    List<PackageDTO> getWishListById(String userId);
 
 }

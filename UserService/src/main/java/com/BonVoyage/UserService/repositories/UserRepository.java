@@ -1,6 +1,7 @@
 package com.BonVoyage.UserService.repositories;
 
 import com.BonVoyage.UserService.models.User;
+import com.BonVoyage.UserService.payloads.UserDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +15,5 @@ public interface UserRepository extends JpaRepository<User,String>{
 
     Optional<User> findByUserEmail( String userEmail);
 
+    UserDTO findByUserRole(String admin);
 }

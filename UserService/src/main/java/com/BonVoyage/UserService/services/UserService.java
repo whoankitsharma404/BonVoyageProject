@@ -1,12 +1,14 @@
 package com.BonVoyage.UserService.services;
 
+import com.BonVoyage.UserService.payloads.LoginRequest;
+import com.BonVoyage.UserService.payloads.LoginResponse;
 import com.BonVoyage.UserService.payloads.UserDTO;
 
 public interface UserService {
 
-    UserDTO registerNewAccount(UserDTO userDTO);
+    UserDTO registerNewAccount(UserDTO userDTO) throws Exception;
 
-    UserDTO loginUser(UserDTO userDTO);
+    LoginResponse loginUser(LoginRequest userDTO) throws Exception;
 
     UserDTO getUserByUserName(String userName);
 
@@ -14,4 +16,5 @@ public interface UserService {
 
     UserDTO deletePackageFromWishList(String userId, String packageId);
 
+    UserDTO getAdminDetails();
 }

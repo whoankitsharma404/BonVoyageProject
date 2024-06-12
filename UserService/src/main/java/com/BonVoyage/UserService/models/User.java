@@ -19,7 +19,7 @@ public class User {
     @Column(name = "user_id", nullable = false, unique = true)
     private String userID;
 
-    @Column(name = "user_name", nullable = false, unique = true)
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
     @Column(name = "user_email", nullable = false, unique = true)
@@ -42,13 +42,13 @@ public class User {
     private UserRole userRole;
 
     @Timestamp
-    @Column(name = "created_date", nullable = false, unique = true)
-    private String createdDate;
+    @Column(name = "created_at", nullable = false, unique = true)
+    private String createdAt;
 
     @Timestamp
-    @Column(name = "updated_date", nullable = false, unique = true)
-    private String updatedDate;
+    @Column(name = "updated_at", nullable = false, unique = true)
+    private String updatedAt;
 
-    @Column(name = "__v", nullable = false, unique = true)
+    @Column(name = "__v", nullable = false)
     private int version;
 }

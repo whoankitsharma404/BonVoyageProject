@@ -1,6 +1,8 @@
 package com.BonVoyage.UserService.controllers;
 
 import com.BonVoyage.UserService.payloads.ApiResponse;
+import com.BonVoyage.UserService.payloads.LoginRequest;
+import com.BonVoyage.UserService.payloads.LoginResponse;
 import com.BonVoyage.UserService.payloads.UserDTO;
 import com.BonVoyage.UserService.services.UserService;
 import lombok.AllArgsConstructor;
@@ -26,18 +28,36 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody UserDTO userDTO){
-        return new ResponseEntity<>(this.userService.loginUser(userDTO), HttpStatus.OK);
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest userDTO) throws Exception{
+        LoginResponse response =null;
+        try{
+            response = userService.loginUser(userDTO);
+            return new ResponseEntity<>(new ApiResponse(response,"success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(response,"failed",0),HttpStatus.OK);
+        }
     }
 
     @GetMapping("/user/{userName}")
     public ResponseEntity<?> getUserByName(@PathVariable String userName){
-        return new ResponseEntity<>(this.userService.getUserByUserName(userName), HttpStatus.OK);
+        UserDTO user =null;
+        try{
+            user = userService.getUserByUserName(userName);
+            return new ResponseEntity<>(new ApiResponse(user,"success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(user,"failed",0),HttpStatus.OK);
+        }
     }
 
     @PutMapping("/wishlist/{userId}/{packageId}")
     public ResponseEntity<?> updateUserWishList(@PathVariable String userId,@PathVariable String packageId){
-        return new ResponseEntity<>(this.userService.updateWishList(userId,packageId), HttpStatus.OK);
+        UserDTO user =null;
+        try{
+            user =this.userService.updateWishList(userId,packageId);
+            return new ResponseEntity<>(new ApiResponse(user,"success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(user,"failed",0),HttpStatus.OK);
+        }
     }
 
     @DeleteMapping("/wishlist/{userId}/{packageId}")
@@ -45,7 +65,10 @@ public class UserController {
         return new ResponseEntity<>(this.userService.deletePackageFromWishList(userId,packageId), HttpStatus.OK);
     }
 
-
+    @GetMapping("/admin")
+    public ResponseEntity<?> adminDetailsWithBookings(){
+        return new ResponseEntity<>(this.userService.getAdminDetails(), HttpStatus.OK);
+    }
 
 
 }

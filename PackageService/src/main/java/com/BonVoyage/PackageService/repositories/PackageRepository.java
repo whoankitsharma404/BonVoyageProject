@@ -7,4 +7,7 @@ import java.util.List;
 
 public interface PackageRepository extends JpaRepository<Packages,String> {
     List<Packages> findByPackageCountry(String destination);
+
+    Packages findByPackageID(String packageId);
+
 }
