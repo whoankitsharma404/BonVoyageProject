@@ -31,11 +31,11 @@ public class BookingController {
         }
     }
 
-    @PostMapping("/bookings/add")
-    public ResponseEntity<?> userBooking(@RequestBody BookingsDTO bookings){
-        NewUserBooking bookingsDTO =null;
+    @PostMapping("/bookings/{userID}/{packageID}")
+    public ResponseEntity<?> userBooking(@PathVariable String userID, @PathVariable String packageID){
+        Bookings bookingsDTO =null;
         try{
-            bookingsDTO = bookingService.saveBooking(bookings);
+            bookingsDTO = bookingService.saveBooking(userID,packageID);
             return new ResponseEntity<>(new ApiResponse(bookingsDTO,"success",1),HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(new ApiResponse(bookingsDTO,"failed",0),HttpStatus.OK);

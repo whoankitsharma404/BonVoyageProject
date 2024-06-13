@@ -16,4 +16,6 @@ public interface BookingService {
     void deleteBookingById(String bookingId);
 
     NewUserBooking saveBooking(BookingsDTO bookings);
+
+    Bookings saveBooking(String userID, String packageID);
 }

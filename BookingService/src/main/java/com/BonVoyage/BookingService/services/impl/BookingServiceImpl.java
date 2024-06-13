@@ -72,4 +72,16 @@ public class BookingServiceImpl implements BookingService {
         return null;
 
     }
+
+    @Override
+    public Bookings saveBooking(String userID, String packageID) {
+        String lastValue = bookingsRepository.findMaxBookingsId();
+
+//        Bookings newUserBooking = Bookings.builder()
+//                .bookingID(IdGeneration.generateNextBookingId(lastValue))
+//                .bookingCost(bookings.getBookingCost())
+//                .bookingDate(String.valueOf(new Date()))
+//                .build();
+        return null;
+    }
 }

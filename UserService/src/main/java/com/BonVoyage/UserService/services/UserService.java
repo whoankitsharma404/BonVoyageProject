@@ -1,5 +1,6 @@
 package com.BonVoyage.UserService.services;
 
+import com.BonVoyage.UserService.models.UsersWishList;
 import com.BonVoyage.UserService.payloads.LoginRequest;
 import com.BonVoyage.UserService.payloads.LoginResponse;
 import com.BonVoyage.UserService.payloads.PackageDTO;
@@ -23,4 +24,6 @@ public interface UserService {
     Object createPackage(PackageDTO packageDTO);
 
     void logout(HttpServletRequest request);
+
+    UsersWishList addingWishList(String userID, String packageID);
 }

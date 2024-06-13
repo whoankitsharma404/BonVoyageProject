@@ -1,5 +1,6 @@
 package com.BonVoyage.UserService.controllers;
 
+import com.BonVoyage.UserService.models.UsersWishList;
 import com.BonVoyage.UserService.payloads.*;
 import com.BonVoyage.UserService.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -87,6 +88,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpServletRequest request) {
         try{
@@ -97,4 +99,15 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
+    @PostMapping("/wishlist/{userID}/{packageID}")
+    public ResponseEntity<?> addWishList(@PathVariable String userID,@PathVariable String packageID ){
+        UsersWishList response =null;
+        try{
+            response =this.userService.addingWishList(userID,packageID);
+            return new ResponseEntity<>(new ApiResponse(response,"success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(response,"failed",0),HttpStatus.OK);
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.BonVoyage.UsersWishListService.models;
+package com.BonVoyage.UserService.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,4 +27,3 @@ public class UsersWishList {
     private String wishlistID;
 
 }
-

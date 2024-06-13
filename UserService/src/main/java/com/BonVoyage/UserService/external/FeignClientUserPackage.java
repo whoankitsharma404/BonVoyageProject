@@ -12,7 +12,6 @@ import java.util.Map;
 @FeignClient(name= "userpackage",url = "http://localhost:4003")
 public interface FeignClientUserPackage {
 
-
     @PostMapping("/createNewPackage")
     Object doPostSavePackage(@RequestHeader Map<String,String> headers, @RequestParam Map<String,String> params, @RequestBody Object body);
 

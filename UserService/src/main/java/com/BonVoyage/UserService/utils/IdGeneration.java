@@ -16,6 +16,16 @@ public class IdGeneration {
         return newUserId;
     }
 
+    public static String generateNextUsersWishListId(String maxUserId) {
+        if (maxUserId == null) {
+            return "W101";
+        }
+
+        int numericPart = Integer.parseInt(maxUserId.substring(1));
+        String newUserId = "W" + (numericPart + 1);
+        return newUserId;
+    }
+
     public static String generateNextPackageId(String maxUserId) {
         if (maxUserId == null) {
             return "P101";

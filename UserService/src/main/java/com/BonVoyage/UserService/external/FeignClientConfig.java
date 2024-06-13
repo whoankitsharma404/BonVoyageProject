@@ -11,5 +11,4 @@ public interface FeignClientConfig {
     @PostMapping("/bookings/add")
     Object doPostCall(@RequestHeader Map<String,String> headers, @RequestParam Map<String,String> params, @RequestBody Object body);
 
-
 }

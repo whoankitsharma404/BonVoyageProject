@@ -9,5 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class UsersWishListDTO {
     private String userID;
-    private String WishlistID;
+    private String wishlistID;
+    private String packageID;
+
 }

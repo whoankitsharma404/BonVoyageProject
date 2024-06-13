@@ -1,10 +1,11 @@
 package com.BonVoyage.UserService.services.impl;
 
-import com.BonVoyage.UserService.external.FeignClientConfig;
 import com.BonVoyage.UserService.external.FeignClientUserPackage;
 import com.BonVoyage.UserService.models.User;
+import com.BonVoyage.UserService.models.UsersWishList;
 import com.BonVoyage.UserService.payloads.*;
 import com.BonVoyage.UserService.repositories.UserRepository;
+import com.BonVoyage.UserService.repositories.UsersWishListRepository;
 import com.BonVoyage.UserService.services.UserService;
 import com.BonVoyage.UserService.utils.EncryptionUtils;
 import com.BonVoyage.UserService.utils.IdGeneration;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     private final FeignClientUserPackage feignClientUserPackage;
 
+    private final UsersWishListRepository usersWishListRepository;
     private static String SESSION_ID=  null;
 
     @Override
@@ -128,5 +130,19 @@ public class UserServiceImpl implements UserService {
         if (session != null) {
             session.invalidate();
         }
+    }
+
+    @Override
+    public UsersWishList addingWishList(String userID, String packageID) {
+
+        String lastUser = usersWishListRepository.findMaxUserWishListId();
+
+        UsersWishList usersWishList =UsersWishList.builder()
+                .wishlistID(IdGeneration.generateNextUsersWishListId(lastUser))
+                .packageID(packageID)
+                .userID(userID)
+                .build();
+        UsersWishList usersWishList2 =usersWishListRepository.save(usersWishList);
+         return usersWishList2;
     }
 }
