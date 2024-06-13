@@ -1,14 +1,14 @@
 package com.BonVoyage.PackageService.services.impl;
 
+import com.BonVoyage.PackageService.external.PackageItenaryService;
 import com.BonVoyage.PackageService.models.Packages;
 import com.BonVoyage.PackageService.payloads.PackageDTO;
+import com.BonVoyage.PackageService.payloads.PackageItenaryDto;
 import com.BonVoyage.PackageService.repositories.PackageRepository;
 import com.BonVoyage.PackageService.services.PackageService;
-import com.BonVoyage.PackageService.utils.Mapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class PackageServiceImpl implements PackageService {
 
     private PackageRepository packageRepository;
+    private PackageItenaryService packageItenaryService;
 
     @Override
     public List<PackageDTO> getAllPackages() {
@@ -43,6 +44,11 @@ public class PackageServiceImpl implements PackageService {
         packageDTO.setPackageImage(pkg.getPackageImage());
         packageDTO.setCreatedDate(pkg.getCreatedDate());
         packageDTO.setUpdatedDate(pkg.getUpdatedDate());
+
+
+        List<PackageItenaryDto> all =packageItenaryService.getPackageItenary(pkg.getPackageID());
+
+        packageDTO.setPackageItenary(all);
         return packageDTO;
     }
 

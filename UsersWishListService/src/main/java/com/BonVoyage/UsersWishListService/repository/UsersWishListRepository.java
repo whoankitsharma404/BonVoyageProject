@@ -1,6 +1,6 @@
-package com.BonVoyage.UserService.repositories;
+package com.BonVoyage.UsersWishListService.repository;
 
-import com.BonVoyage.UserService.models.UsersWishList;
+import com.BonVoyage.UsersWishListService.models.UsersWishList;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsersWishListRepository extends JpaRepository<UsersWishList,String> {

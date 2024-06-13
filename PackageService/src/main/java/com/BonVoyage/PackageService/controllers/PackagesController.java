@@ -27,7 +27,6 @@ public class PackagesController {
         }catch (Exception e){
             return new ResponseEntity<>(new ApiResponse(packageDTOList,"failed",0),HttpStatus.OK);
         }
-
     }
 
     @GetMapping("/getPackages/{destination}")
@@ -40,7 +39,6 @@ public class PackagesController {
         }catch (Exception e){
             return new ResponseEntity<>(new ApiResponse(packageDTOList,"failed",0),HttpStatus.OK);
         }
-
     }
 
     @GetMapping("/onepackage/{packageId}")

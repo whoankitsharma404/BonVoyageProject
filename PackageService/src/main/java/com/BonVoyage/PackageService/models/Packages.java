@@ -1,9 +1,6 @@
 package com.BonVoyage.PackageService.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -73,9 +70,5 @@ public class Packages {
     @Timestamp
     @Column(name = "updated_date", nullable = false, unique = true)
     private String updatedDate;
-
-//    @Column(name = "package_itenary")
-//    private List<PackageItenary> packageItenary;
-
 
 }

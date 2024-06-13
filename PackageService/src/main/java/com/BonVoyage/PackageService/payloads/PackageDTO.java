@@ -1,11 +1,11 @@
 package com.BonVoyage.PackageService.payloads;
 
-import jakarta.persistence.Column;
-import jdk.jfr.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -46,6 +46,8 @@ public class PackageDTO {
     private String createdDate;
 
     private String updatedDate;
+
+    private List<PackageItenaryDto> packageItenary;
 
 
 }
