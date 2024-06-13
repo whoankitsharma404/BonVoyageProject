@@ -1,6 +1,7 @@
 package com.BonVoyage.UserService.services.impl;
 
 import com.BonVoyage.UserService.external.FeignClientConfig;
+import com.BonVoyage.UserService.external.FeignClientUserPackage;
 import com.BonVoyage.UserService.models.User;
 import com.BonVoyage.UserService.payloads.*;
 import com.BonVoyage.UserService.repositories.UserRepository;
@@ -14,22 +15,17 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.net.URI;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private static
-
     private final UserRepository userRepository;
 
-    private final FeignClientConfig feignClientConfig;
+    private final FeignClientUserPackage feignClientUserPackage;
+
+    private static String SESSION_ID=  null;
 
     @Override
     public UserDTO registerNewAccount(UserDTO userDTO) throws Exception {
@@ -82,9 +78,6 @@ public class UserServiceImpl implements UserService {
         assert fetchedUser != null;
         if(Boolean.TRUE.equals(validatingUserNameAndPassword(fetchedUser,userDTO.getUserPassword()))){
 
-            HttpSession session = request.getSession();
-            session.setAttribute("user", fetchedUser);
-
              LoginResponse response = new LoginResponse();
              response.setUserID(fetchedUser.getUserID());
              response.setUserRole(fetchedUser.getUserRole());
@@ -125,8 +118,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO createPackage(PackageDTO packageDTO) {
-        return null;
+    public Object createPackage(PackageDTO packageDTO) {
+        return feignClientUserPackage.doPostSavePackage(null,null,packageDTO);
     }
 
     @Override

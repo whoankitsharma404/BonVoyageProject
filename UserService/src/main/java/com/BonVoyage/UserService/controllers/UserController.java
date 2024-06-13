@@ -15,6 +15,7 @@ public class UserController {
 
     private UserService userService;
 
+    @CrossOrigin
     @PostMapping("/register")
     public ResponseEntity<?> registerNewUser(@RequestBody UserDTO userDTO){
         UserDTO registeredUser =null;
@@ -26,6 +27,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest userDTO, HttpServletRequest request) throws Exception{
         LoginResponse response =null;
@@ -37,6 +39,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/user/{userName}")
     public ResponseEntity<?> getUserByName(@PathVariable String userName){
         UserDTO user =null;
@@ -48,6 +51,7 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @PutMapping("/wishlist/{userId}/{packageId}")
     public ResponseEntity<?> updateUserWishList(@PathVariable String userId,@PathVariable String packageId){
         UserDTO user =null;
@@ -59,19 +63,22 @@ public class UserController {
         }
     }
 
+    @CrossOrigin
     @DeleteMapping("/wishlist/{userId}/{packageId}")
     public ResponseEntity<?> deletePackageFromWishlist(@PathVariable String userId,@PathVariable String packageId){
         return new ResponseEntity<>(this.userService.deletePackageFromWishList(userId,packageId), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @GetMapping("/admin")
     public ResponseEntity<?> adminDetailsWithBookings(){
         return new ResponseEntity<>(this.userService.getAdminDetails(), HttpStatus.OK);
     }
 
+    @CrossOrigin
     @PostMapping("/createNewPackage")
     public ResponseEntity<?> addNewPackage(@RequestBody PackageDTO packageDTO){
-        UserDTO user =null;
+        Object user =null;
         try{
             user =this.userService.createPackage(packageDTO);
             return new ResponseEntity<>(new ApiResponse(user,"success",1),HttpStatus.CREATED);
@@ -88,8 +95,6 @@ public class UserController {
         }catch (Exception e){
             return new ResponseEntity<>(new ApiResponse("something went wrong!!","failed",0),HttpStatus.OK);
         }
-
-
     }
 
 }

@@ -20,7 +20,7 @@ public interface UserService {
 
     UserDTO getAdminDetails();
 
-    UserDTO createPackage(PackageDTO packageDTO);
+    Object createPackage(PackageDTO packageDTO);
 
     void logout(HttpServletRequest request);
 }

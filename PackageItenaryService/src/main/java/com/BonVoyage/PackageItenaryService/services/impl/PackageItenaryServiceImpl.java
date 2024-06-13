@@ -19,7 +19,7 @@ public class PackageItenaryServiceImpl implements PackageItenaryService {
 
     @Override
     public List<PackageItenaryDto> getAllPackageItenary(String packageId) {
-        List<PackageItenary> allPackagesItenery = packageItenaryRepository.findAll();
+        List<PackageItenary> allPackagesItenery = packageItenaryRepository.findByPackageID(packageId);
         return allPackagesItenery.stream().map(this::mapToPackageItenaryDto).collect(Collectors.toList());
 
     }

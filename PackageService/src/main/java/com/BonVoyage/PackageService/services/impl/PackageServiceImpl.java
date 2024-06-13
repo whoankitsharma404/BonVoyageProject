@@ -77,6 +77,8 @@ public class PackageServiceImpl implements PackageService {
     @Override
     public PackageDTO createPackage(PackageDTO packageDTO) {
         Packages pkg = Mapper.mapToPackageEntity(packageDTO);
+        pkg.setCreatedDate(String.valueOf(new Date()));
+        pkg.setUpdatedDate(String.valueOf(new Date()));
         Packages savedPackage = packageRepository.save(pkg);
         return Mapper.mapToPackageDto(savedPackage);
     }
