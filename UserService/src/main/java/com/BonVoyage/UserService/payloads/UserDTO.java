@@ -40,6 +40,7 @@ public class UserDTO {
 
     private List<UsersWishListDTO> userWishlist;
     private List<BookingsDTO> userBooking;
+    private List<PackageDTO> packages;
 
 }
 

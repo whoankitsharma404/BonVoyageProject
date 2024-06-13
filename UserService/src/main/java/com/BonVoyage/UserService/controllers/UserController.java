@@ -1,9 +1,6 @@
 package com.BonVoyage.UserService.controllers;
 
-import com.BonVoyage.UserService.payloads.ApiResponse;
-import com.BonVoyage.UserService.payloads.LoginRequest;
-import com.BonVoyage.UserService.payloads.LoginResponse;
-import com.BonVoyage.UserService.payloads.UserDTO;
+import com.BonVoyage.UserService.payloads.*;
 import com.BonVoyage.UserService.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -70,5 +67,15 @@ public class UserController {
         return new ResponseEntity<>(this.userService.getAdminDetails(), HttpStatus.OK);
     }
 
+    @PostMapping("/createNewPackage")
+    public ResponseEntity<?> addNewPackage(@RequestBody PackageDTO packageDTO){
+        UserDTO user =null;
+        try{
+            user =this.userService.createPackage(packageDTO);
+            return new ResponseEntity<>(new ApiResponse(user,"success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse(user,"failed",0),HttpStatus.OK);
+        }
+    }
 
 }

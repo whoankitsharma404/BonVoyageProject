@@ -2,10 +2,7 @@ package com.BonVoyage.UserService.services.impl;
 
 import com.BonVoyage.UserService.external.FeignClientConfig;
 import com.BonVoyage.UserService.models.User;
-import com.BonVoyage.UserService.payloads.BookingsDTO;
-import com.BonVoyage.UserService.payloads.LoginRequest;
-import com.BonVoyage.UserService.payloads.LoginResponse;
-import com.BonVoyage.UserService.payloads.UserDTO;
+import com.BonVoyage.UserService.payloads.*;
 import com.BonVoyage.UserService.repositories.UserRepository;
 import com.BonVoyage.UserService.services.UserService;
 import com.BonVoyage.UserService.utils.EncryptionUtils;
@@ -117,6 +114,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getAdminDetails() {
         return userRepository.findByUserRole("ADMIN");
+    }
+
+    @Override
+    public UserDTO createPackage(PackageDTO packageDTO) {
+        return null;
     }
 
 }

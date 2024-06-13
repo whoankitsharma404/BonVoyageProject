@@ -6,9 +6,12 @@ import com.BonVoyage.PackageService.payloads.PackageDTO;
 import com.BonVoyage.PackageService.payloads.PackageItenaryDto;
 import com.BonVoyage.PackageService.repositories.PackageRepository;
 import com.BonVoyage.PackageService.services.PackageService;
+import com.BonVoyage.PackageService.utils.Mapper;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -69,5 +72,12 @@ public class PackageServiceImpl implements PackageService {
     public List<PackageDTO> getWishListById(String userId) {
 
         return null;
+    }
+
+    @Override
+    public PackageDTO createPackage(PackageDTO packageDTO) {
+        Packages pkg = Mapper.mapToPackageEntity(packageDTO);
+        Packages savedPackage = packageRepository.save(pkg);
+        return Mapper.mapToPackageDto(savedPackage);
     }
 }

@@ -2,6 +2,7 @@ package com.BonVoyage.UserService.services;
 
 import com.BonVoyage.UserService.payloads.LoginRequest;
 import com.BonVoyage.UserService.payloads.LoginResponse;
+import com.BonVoyage.UserService.payloads.PackageDTO;
 import com.BonVoyage.UserService.payloads.UserDTO;
 
 public interface UserService {
@@ -17,4 +18,6 @@ public interface UserService {
     UserDTO deletePackageFromWishList(String userId, String packageId);
 
     UserDTO getAdminDetails();
+
+    UserDTO createPackage(PackageDTO packageDTO);
 }
