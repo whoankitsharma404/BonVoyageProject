@@ -2,6 +2,8 @@ package com.BonVoyage.UserService.controllers;
 
 import com.BonVoyage.UserService.payloads.*;
 import com.BonVoyage.UserService.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +27,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest userDTO) throws Exception{
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest userDTO, HttpServletRequest request) throws Exception{
         LoginResponse response =null;
         try{
-            response = userService.loginUser(userDTO);
+            response = userService.loginUser(userDTO,request);
             return new ResponseEntity<>(new ApiResponse(response,"success",1),HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(new ApiResponse(response,"failed",0),HttpStatus.OK);
@@ -76,6 +78,18 @@ public class UserController {
         }catch (Exception e){
             return new ResponseEntity<>(new ApiResponse(user,"failed",0),HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/logout")
+    public ResponseEntity<?> logout(HttpServletRequest request) {
+        try{
+            this.userService.logout(request);
+            return new ResponseEntity<>(new ApiResponse("logged out successfully","success",1),HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ApiResponse("something went wrong!!","failed",0),HttpStatus.OK);
+        }
+
+
     }
 
 }

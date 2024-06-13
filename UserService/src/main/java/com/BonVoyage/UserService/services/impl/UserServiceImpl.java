@@ -9,6 +9,8 @@ import com.BonVoyage.UserService.utils.EncryptionUtils;
 import com.BonVoyage.UserService.utils.IdGeneration;
 import com.BonVoyage.UserService.utils.Mapper;
 import io.micrometer.common.util.StringUtils;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,8 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
+
+    private static
 
     private final UserRepository userRepository;
 
@@ -70,13 +74,17 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public LoginResponse loginUser(LoginRequest userDTO) throws Exception {
+    public LoginResponse loginUser(LoginRequest userDTO, HttpServletRequest request) throws Exception {
         if(StringUtils.isBlank(userDTO.getUserEmail()) || StringUtils.isBlank(userDTO.getUserPassword())){
             throw new Exception("Enter valid email and password!!");
         }
         User fetchedUser = userRepository.findByUserEmail(userDTO.getUserEmail()).orElse(null);
         assert fetchedUser != null;
         if(Boolean.TRUE.equals(validatingUserNameAndPassword(fetchedUser,userDTO.getUserPassword()))){
+
+            HttpSession session = request.getSession();
+            session.setAttribute("user", fetchedUser);
+
              LoginResponse response = new LoginResponse();
              response.setUserID(fetchedUser.getUserID());
              response.setUserRole(fetchedUser.getUserRole());
@@ -121,4 +129,11 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public void logout(HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+    }
 }
